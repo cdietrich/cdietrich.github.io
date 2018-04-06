@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <!-- JQuery (used for bootstrap and jekyll search) -->
+    <script src="/assets/js/jquery-3.2.1.min.js" ></script>
+    
+    <!-- Main JS (navbar.js and katex_init.js)-->
+    <script defer=true src="/assets/js/main.min.js"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="/assets/img/xtext-bullet.png" type="image/x-icon">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://localhost:4000/xtext/2011/07/29/xtend2-code-generators-with-non-xtext-models.html">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="Xtext and more" href="http://localhost:4000///feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.min.css">
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css"> 
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+
+    <!-- Google Analytics -->
+    
+    
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.4.0 -->
+<title>Xtend2 Code Generators with Non-Xtext Models | Xtext and more</title>
+<meta name="generator" content="Jekyll v3.7.3" />
+<meta property="og:title" content="Xtend2 Code Generators with Non-Xtext Models" />
+<meta name="author" content="Christian Dietrich" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="In this blog post i want to show a simple example of how to use Xtend2 to generate code from Non-Xtext but EMF-based model." />
+<meta property="og:description" content="In this blog post i want to show a simple example of how to use Xtend2 to generate code from Non-Xtext but EMF-based model." />
+<link rel="canonical" href="http://localhost:4000/xtext/2011/07/29/xtend2-code-generators-with-non-xtext-models.html" />
+<meta property="og:url" content="http://localhost:4000/xtext/2011/07/29/xtend2-code-generators-with-non-xtext-models.html" />
+<meta property="og:site_name" content="Xtext and more" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2011-07-29T20:12:29+02:00" />
+<script type="application/ld+json">
+{"description":"In this blog post i want to show a simple example of how to use Xtend2 to generate code from Non-Xtext but EMF-based model.","author":{"@type":"Person","name":"Christian Dietrich"},"@type":"BlogPosting","url":"http://localhost:4000/xtext/2011/07/29/xtend2-code-generators-with-non-xtext-models.html","headline":"Xtend2 Code Generators with Non-Xtext Models","dateModified":"2011-07-29T20:12:29+02:00","datePublished":"2011-07-29T20:12:29+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/xtext/2011/07/29/xtend2-code-generators-with-non-xtext-models.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <!-- Manual seo tags -->
+    <!--
+    <title>Xtend2 Code Generators with Non-Xtext Models | Xtext and more</title>
+    <meta name="description" content="In this blog post i want to show a simple example of how to use Xtend2 to generate code from Non-Xtext but EMF-based model.">
+    -->
+</head>
+
+  <body>
+    <header class="site-header">
+    
+    <!-- Logo and title -->
+	<div class="branding">
+		<a href="/">
+			<img class="avatar" src="/assets/img/xtext-bullet.png" alt=""/>
+		</a>
+
+		<h1 class="site-title">
+			<a href="/">Xtext and more</a>
+		</h1>
+	</div>
+    
+    <!-- Toggle menu -->
+    <nav class="clear">
+    <a id="pull" class="toggle" href="#">
+    <i class="fa fa-bars fa-lg"></i>
+    </a>
+    
+    <!-- Menu -->
+    <ul>
+        
+        
+        
+        
+        <li class="separator">
+            |
+        </li>
+        <li>
+            <a class="clear" href="/about/">
+                About
+            </a>
+        </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+         
+        
+        
+        <li class="separator">
+            |
+        </li>
+        <li>
+            <a class="clear" href="http://localhost:4000/search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+        
+        <li class="separator">
+            |
+        </li>
+        <li>
+            <a class="clear" href="http://localhost:4000/tags">
+                <i class="fa fa-tags" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+        
+    </ul>
+        
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header id="main" style="background-image: url('/')">
+    <h1 id="Xtend2+Code+Generators+with+Non-Xtext+Models" class="title">Xtend2 Code Generators with Non-Xtext Models</h1>
+    <p class="meta">
+    July 29, 2011
+     - Christian Dietrich
+    </p>
+  </header>
+  <section class="post-content"><p>In this blog post i want to show a simple example of how to use Xtend2 to generate code from Non-Xtext but EMF-based model.</p>
+
+<p><img src="http://localhost:4000/assets/img/blog/xtend-emf1.png" alt="Xtend with EMF" /></p>
+
+<p>Having a simple EMF Model i’ve created the genmodel + Model + Edit + Editor code.
+Using the Editor i’ve created a bunch of .sample files and now want to
+generate code using Xtend2</p>
+
+<p><img src="http://localhost:4000/assets/img/blog/xtend-emf-models.png" alt="Xtend EMF Models" /></p>
+
+<p>Xtend comes with an <code class="highlighter-rouge">IGenerator</code> interface that i implement in my <code class="highlighter-rouge">SampleGenerator</code> Xtend file</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">sample</span>
+ 
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">eclipse</span><span class="p">.</span><span class="n">emf</span><span class="p">.</span><span class="n">ecore</span><span class="p">.</span><span class="n">resource</span><span class="p">.</span><span class="n">Resource</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">eclipse</span><span class="p">.</span><span class="n">xtext</span><span class="p">.</span><span class="n">generator</span><span class="p">.</span><span class="n">IGenerator</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">eclipse</span><span class="p">.</span><span class="n">xtext</span><span class="p">.</span><span class="n">generator</span><span class="p">.</span><span class="n">IFileSystemAccess</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">eclipse</span><span class="p">.</span><span class="n">emf</span><span class="p">.</span><span class="n">ecore</span><span class="p">.</span><span class="n">EObject</span>
+ 
+<span class="n">class</span> <span class="n">SampleGenerator</span> <span class="n">implements</span> <span class="n">IGenerator</span> <span class="p">{</span>
+ 
+    <span class="n">override</span> <span class="n">void</span> <span class="n">doGenerate</span><span class="p">(</span><span class="n">Resource</span> <span class="n">resource</span><span class="p">,</span> <span class="n">IFileSystemAccess</span> <span class="n">fsa</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">for</span> <span class="p">(</span><span class="n">EObject</span> <span class="n">o</span> <span class="p">:</span> <span class="n">resource</span><span class="p">.</span><span class="n">contents</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">o</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="n">fsa</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+ 
+    <span class="n">def</span> <span class="n">dispatch</span> <span class="n">void</span> <span class="nf">compile</span><span class="p">(</span><span class="k">Model</span> <span class="n">m</span><span class="p">,</span> <span class="n">IFileSystemAccess</span> <span class="n">fsa</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">for</span> <span class="p">(</span><span class="n">e</span> <span class="p">:</span> <span class="n">m</span><span class="p">.</span><span class="n">elements</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">e</span><span class="p">.</span><span class="nf">compile</span><span class="p">(</span><span class="n">fsa</span><span class="p">)</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+ 
+    <span class="n">def</span> <span class="nf">compile</span><span class="p">(</span><span class="n">Element</span> <span class="n">e</span><span class="p">,</span> <span class="n">IFileSystemAccess</span> <span class="n">fsa</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">fsa</span><span class="p">.</span><span class="n">generateFile</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">name</span><span class="p">+</span><span class="s2">".txt"</span><span class="p">,</span> <span class="s1">'''
+        this is element «e.name»
+        '''</span><span class="p">)</span>
+    <span class="p">}</span>
+ 
+    <span class="n">def</span> <span class="n">dispatch</span> <span class="n">void</span> <span class="nf">compile</span><span class="p">(</span><span class="n">EObject</span> <span class="n">m</span><span class="p">,</span> <span class="n">IFileSystemAccess</span> <span class="n">fsa</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+ 
+<span class="p">}</span>
+</code></pre></div></div>
+<p>The last step we need is a workflow that reads the model files and invokes the generator</p>
+
+<p>First we need to create some java classes that exposes our .sample to the reader
+(resourceseriveprovider) and
+do some Guice Binding Stuff (Generator / ResourceSet ….)</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">sample</span><span class="p">;</span>
+ 
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">eclipse</span><span class="p">.</span><span class="n">emf</span><span class="p">.</span><span class="n">ecore</span><span class="p">.</span><span class="n">resource</span><span class="p">.</span><span class="n">ResourceSet</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">eclipse</span><span class="p">.</span><span class="n">emf</span><span class="p">.</span><span class="n">ecore</span><span class="p">.</span><span class="n">resource</span><span class="p">.</span><span class="n">impl</span><span class="p">.</span><span class="n">ResourceSetImpl</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">eclipse</span><span class="p">.</span><span class="n">xtext</span><span class="p">.</span><span class="n">generator</span><span class="p">.</span><span class="n">IGenerator</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">eclipse</span><span class="p">.</span><span class="n">xtext</span><span class="p">.</span><span class="n">resource</span><span class="p">.</span><span class="n">generic</span><span class="p">.</span><span class="n">AbstractGenericResourceRuntimeModule</span><span class="p">;</span>
+ 
+<span class="k">public</span> <span class="n">class</span> <span class="n">SampleGeneratorModule</span> <span class="n">extends</span> <span class="n">AbstractGenericResourceRuntimeModule</span> <span class="p">{</span>
+ 
+    <span class="p">@</span><span class="n">Override</span>
+    <span class="n">protected</span> <span class="k">String</span> <span class="n">getLanguageName</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">return</span> <span class="s2">"sample.presentation.SampleEditorID"</span><span class="p">;</span>
+    <span class="p">}</span>
+ 
+    <span class="p">@</span><span class="n">Override</span>
+    <span class="n">protected</span> <span class="k">String</span> <span class="n">getFileExtensions</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">return</span> <span class="s2">"sample"</span><span class="p">;</span>
+    <span class="p">}</span>
+ 
+    <span class="k">public</span> <span class="n">Class</span><span class="p">&lt;?</span> <span class="n">extends</span> <span class="n">IGenerator</span><span class="p">&gt;</span> <span class="n">bindIGenerator</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">return</span> <span class="n">SampleGenerator</span><span class="p">.</span><span class="n">class</span><span class="p">;</span>
+    <span class="p">}</span>
+ 
+    <span class="k">public</span> <span class="n">Class</span><span class="p">&lt;?</span> <span class="n">extends</span> <span class="n">ResourceSet</span><span class="p">&gt;</span> <span class="n">bindResourceSet</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">return</span> <span class="n">ResourceSetImpl</span><span class="p">.</span><span class="n">class</span><span class="p">;</span>
+    <span class="p">}</span>
+ 
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">sample</span><span class="p">;</span>
+ 
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">eclipse</span><span class="p">.</span><span class="n">xtext</span><span class="p">.</span><span class="n">ISetup</span><span class="p">;</span>
+ 
+<span class="n">import</span> <span class="n">com</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">inject</span><span class="p">.</span><span class="n">Guice</span><span class="p">;</span>
+<span class="n">import</span> <span class="n">com</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">inject</span><span class="p">.</span><span class="n">Injector</span><span class="p">;</span>
+ 
+<span class="k">public</span> <span class="n">class</span> <span class="n">SampleGeneratorSetup</span> <span class="n">implements</span> <span class="n">ISetup</span> <span class="p">{</span>
+ 
+    <span class="p">@</span><span class="n">Override</span>
+    <span class="k">public</span> <span class="n">Injector</span> <span class="n">createInjectorAndDoEMFRegistration</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">return</span> <span class="n">Guice</span><span class="p">.</span><span class="n">createInjector</span><span class="p">(</span><span class="n">new</span> <span class="n">SampleGeneratorModule</span><span class="p">());</span>
+    <span class="p">}</span>
+ 
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">sample</span><span class="p">;</span>
+ 
+<span class="n">import</span> <span class="n">org</span><span class="p">.</span><span class="n">eclipse</span><span class="p">.</span><span class="n">xtext</span><span class="p">.</span><span class="n">resource</span><span class="p">.</span><span class="n">generic</span><span class="p">.</span><span class="n">AbstractGenericResourceSupport</span><span class="p">;</span>
+ 
+<span class="n">import</span> <span class="n">com</span><span class="p">.</span><span class="n">google</span><span class="p">.</span><span class="n">inject</span><span class="p">.</span><span class="n">Module</span><span class="p">;</span>
+ 
+<span class="k">public</span> <span class="n">class</span> <span class="n">SampleGeneratorSupport</span> <span class="n">extends</span> <span class="n">AbstractGenericResourceSupport</span> <span class="p">{</span>
+ 
+    <span class="p">@</span><span class="n">Override</span>
+    <span class="n">protected</span> <span class="n">Module</span> <span class="n">createGuiceModule</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">return</span> <span class="n">new</span> <span class="n">SampleGeneratorModule</span><span class="p">();</span>
+    <span class="p">}</span>
+ 
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>finally we wire this together in the workflow file</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module sample.SampleGenerator
+ 
+import org.eclipse.emf.mwe.utils.*
+ 
+var targetDir = "src-gen"
+var modelPath = "model"
+ 
+Workflow {
+ 
+    bean = StandaloneSetup {
+        registerGeneratedEPackage = "sample.SamplePackage"
+    }
+ 
+    component = DirectoryCleaner {
+        directory = targetDir
+    }
+ 
+    component = sample.SampleGeneratorSupport {}
+ 
+    component = org.eclipse.xtext.mwe.Reader {
+        path = modelPath
+        register = sample.SampleGeneratorSetup {}
+        loadResource = {
+            slot = "model"
+        }
+    }
+ 
+    component = org.eclipse.xtext.generator.GeneratorComponent {
+        register = sample.SampleGeneratorSetup {}
+        slot = 'model'
+        outlet = {
+            path = targetDir
+        }
+    }
+}
+</code></pre></div></div>
+
+<p>running the workflow we get nice files generated</p>
+
+<p><img src="http://localhost:4000/assets/img/blog/xtend-emf-result.png" alt="Xtend EMF Models + Generated" /></p>
+</section>
+   
+   <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/tags#EMF">
+      <p><i class="fa fa-tag fa-fw"></i> EMF</p>
+    </a>
+    
+    <a class="button" href="/tags#Xtend">
+      <p><i class="fa fa-tag fa-fw"></i> Xtend</p>
+    </a>
+    
+    <a class="button" href="/tags#Xtext">
+      <p><i class="fa fa-tag fa-fw"></i> Xtext</p>
+    </a>
+    
+  </div>
+</footer>
+
+    
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/xtext/2011/07/22/customizing-xtext-metamodel-inference-using-xtend2.html">
+        Customizing Xtext Metamodel Inference using Xtend2
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/xtext/2011/09/19/xtext-content-assist-auto-activation.html">
+        Xtext Content Assist Auto Activation
+      </a>
+  </div>
+  
+</div>
+
+    </div>
+    
+<footer class="site-footer">
+    <p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
+</p>
+            <div class="footer-icons">
+                <ul>
+                <!-- Social icons from Font Awesome, if enabled -->
+                
+<li>
+	<a href="http://localhost:4000/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/cdietrich" title="Follow on GitHub">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/chrdietrich" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+                </ul>
+            </div>
+</footer>
+
+
+
+
+  </body>
+</html>

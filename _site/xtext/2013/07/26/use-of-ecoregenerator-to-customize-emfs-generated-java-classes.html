@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    
+    <!-- JQuery (used for bootstrap and jekyll search) -->
+    <script src="/assets/js/jquery-3.2.1.min.js" ></script>
+    
+    <!-- Main JS (navbar.js and katex_init.js)-->
+    <script defer=true src="/assets/js/main.min.js"></script>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/assets/css/main.css">
+
+    <!--Favicon-->
+    <link rel="shortcut icon" href="/assets/img/xtext-bullet.png" type="image/x-icon">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="http://localhost:4000/xtext/2013/07/26/use-of-ecoregenerator-to-customize-emfs-generated-java-classes.html">
+
+    <!-- RSS -->
+    <link rel="alternate" type="application/atom+xml" title="Xtext and more" href="http://localhost:4000///feed.xml"/>
+
+    <!-- Font Awesome -->
+    <!-- <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"> -->
+    <link rel="stylesheet" type="text/css" href="/assets/css/font-awesome.min.css">
+
+    <!-- Google Fonts -->
+    
+    <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,700italic,400italic" rel="stylesheet" type="text/css"> 
+    
+
+    <!-- KaTeX 0.8.3 -->
+    
+
+    <!-- Google Analytics -->
+    
+    
+    <!-- seo tags -->
+    <!-- Begin Jekyll SEO tag v2.4.0 -->
+<title>Use of EcoreGenerator to customize EMFs generated Java Classes | Xtext and more</title>
+<meta name="generator" content="Jekyll v3.7.3" />
+<meta property="og:title" content="Use of EcoreGenerator to customize EMFs generated Java Classes" />
+<meta name="author" content="Christian Dietrich" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This is a blog post on the usage of the org.eclipse.emf.mwe2.ecore.EcoreGenerator worflow component. It is an alternative to EMFs JMerge Based approach to customize generated Java Classes from an ecore model." />
+<meta property="og:description" content="This is a blog post on the usage of the org.eclipse.emf.mwe2.ecore.EcoreGenerator worflow component. It is an alternative to EMFs JMerge Based approach to customize generated Java Classes from an ecore model." />
+<link rel="canonical" href="http://localhost:4000/xtext/2013/07/26/use-of-ecoregenerator-to-customize-emfs-generated-java-classes.html" />
+<meta property="og:url" content="http://localhost:4000/xtext/2013/07/26/use-of-ecoregenerator-to-customize-emfs-generated-java-classes.html" />
+<meta property="og:site_name" content="Xtext and more" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2013-07-26T08:15:18+02:00" />
+<script type="application/ld+json">
+{"description":"This is a blog post on the usage of the org.eclipse.emf.mwe2.ecore.EcoreGenerator worflow component. It is an alternative to EMFs JMerge Based approach to customize generated Java Classes from an ecore model.","author":{"@type":"Person","name":"Christian Dietrich"},"@type":"BlogPosting","url":"http://localhost:4000/xtext/2013/07/26/use-of-ecoregenerator-to-customize-emfs-generated-java-classes.html","headline":"Use of EcoreGenerator to customize EMFs generated Java Classes","dateModified":"2013-07-26T08:15:18+02:00","datePublished":"2013-07-26T08:15:18+02:00","mainEntityOfPage":{"@type":"WebPage","@id":"http://localhost:4000/xtext/2013/07/26/use-of-ecoregenerator-to-customize-emfs-generated-java-classes.html"},"@context":"http://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <!-- Manual seo tags -->
+    <!--
+    <title>Use of EcoreGenerator to customize EMFs generated Java Classes | Xtext and more</title>
+    <meta name="description" content="This is a blog post on the usage of the org.eclipse.emf.mwe2.ecore.EcoreGenerator worflow component.It is an alternative to EMFs JMerge Based approach to cus...">
+    -->
+</head>
+
+  <body>
+    <header class="site-header">
+    
+    <!-- Logo and title -->
+	<div class="branding">
+		<a href="/">
+			<img class="avatar" src="/assets/img/xtext-bullet.png" alt=""/>
+		</a>
+
+		<h1 class="site-title">
+			<a href="/">Xtext and more</a>
+		</h1>
+	</div>
+    
+    <!-- Toggle menu -->
+    <nav class="clear">
+    <a id="pull" class="toggle" href="#">
+    <i class="fa fa-bars fa-lg"></i>
+    </a>
+    
+    <!-- Menu -->
+    <ul>
+        
+        
+        
+        
+        <li class="separator">
+            |
+        </li>
+        <li>
+            <a class="clear" href="/about/">
+                About
+            </a>
+        </li>
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+         
+        
+        
+        <li class="separator">
+            |
+        </li>
+        <li>
+            <a class="clear" href="http://localhost:4000/search">
+                <i class="fa fa-search" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+        
+        <li class="separator">
+            |
+        </li>
+        <li>
+            <a class="clear" href="http://localhost:4000/tags">
+                <i class="fa fa-tags" aria-hidden="true"></i>
+            </a>
+        </li>
+        
+        
+    </ul>
+        
+	</nav>
+</header>
+
+    <div class="content">
+      <article >
+  <header id="main" style="background-image: url('/')">
+    <h1 id="Use+of+EcoreGenerator+to+customize+EMFs+generated+Java+Classes" class="title">Use of EcoreGenerator to customize EMFs generated Java Classes</h1>
+    <p class="meta">
+    July 26, 2013
+     - Christian Dietrich
+    </p>
+  </header>
+  <section class="post-content"><p>This is a blog post on the usage of the org.eclipse.emf.mwe2.ecore.EcoreGenerator worflow component.
+It is an alternative to EMFs JMerge Based approach to customize generated Java Classes from an ecore model.</p>
+
+<p>So let us asume we have the following Ecore file
+(/sample/model/sample.ecore)</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;ecore:EPackage</span> <span class="na">xmi:version=</span><span class="s">"2.0"</span> <span class="na">xmlns:xmi=</span><span class="s">"http://www.omg.org/XMI"</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
+    <span class="na">xmlns:ecore=</span><span class="s">"http://www.eclipse.org/emf/2002/Ecore"</span> <span class="na">name=</span><span class="s">"sample"</span> <span class="na">nsURI=</span><span class="s">"http://www.eclipse.org/xtext/ecore/sample"</span> <span class="na">nsPrefix=</span><span class="s">"sample"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;eClassifiers</span> <span class="na">xsi:type=</span><span class="s">"ecore:EClass"</span> <span class="na">name=</span><span class="s">"Person"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;eOperations</span> <span class="na">name=</span><span class="s">"getFullname"</span> <span class="na">eType=</span><span class="s">"ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;eStructuralFeatures</span> <span class="na">xsi:type=</span><span class="s">"ecore:EAttribute"</span> <span class="na">name=</span><span class="s">"firstname"</span> <span class="na">eType=</span><span class="s">"ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;eStructuralFeatures</span> <span class="na">xsi:type=</span><span class="s">"ecore:EAttribute"</span> <span class="na">name=</span><span class="s">"lastname"</span> <span class="na">eType=</span><span class="s">"ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"</span><span class="nt">/&gt;</span>
+  <span class="nt">&lt;/eClassifiers&gt;</span>
+<span class="nt">&lt;/ecore:EPackage&gt;</span>
+</code></pre></div></div>
+<p>with the following genmodel
+(/sample/model/sample.genmodel)</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;genmodel:GenModel</span> <span class="na">xmi:version=</span><span class="s">"2.0"</span> <span class="na">xmlns:xmi=</span><span class="s">"http://www.omg.org/XMI"</span> <span class="na">xmlns:ecore=</span><span class="s">"http://www.eclipse.org/emf/2002/Ecore"</span>
+    <span class="na">xmlns:genmodel=</span><span class="s">"http://www.eclipse.org/emf/2002/GenModel"</span> <span class="na">modelDirectory=</span><span class="s">"/sample/src-gen"</span> <span class="na">modelPluginID=</span><span class="s">"sample"</span> <span class="na">modelName=</span><span class="s">"Sample"</span>
+    <span class="na">importerID=</span><span class="s">"org.eclipse.emf.importer.ecore"</span> <span class="na">complianceLevel=</span><span class="s">"6.0"</span> <span class="na">copyrightFields=</span><span class="s">"false"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;foreignModel&gt;</span>sample.ecore<span class="nt">&lt;/foreignModel&gt;</span>
+  <span class="nt">&lt;genPackages</span> <span class="na">prefix=</span><span class="s">"Sample"</span> <span class="na">disposableProviderFactory=</span><span class="s">"true"</span> <span class="na">ecorePackage=</span><span class="s">"sample.ecore#/"</span><span class="nt">&gt;</span>
+    <span class="nt">&lt;genClasses</span> <span class="na">ecoreClass=</span><span class="s">"sample.ecore#//Person"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;genFeatures</span> <span class="na">createChild=</span><span class="s">"false"</span> <span class="na">ecoreFeature=</span><span class="s">"ecore:EAttribute sample.ecore#//Person/firstname"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;genFeatures</span> <span class="na">createChild=</span><span class="s">"false"</span> <span class="na">ecoreFeature=</span><span class="s">"ecore:EAttribute sample.ecore#//Person/lastname"</span><span class="nt">/&gt;</span>
+      <span class="nt">&lt;genOperations</span> <span class="na">ecoreOperation=</span><span class="s">"sample.ecore#//Person/getFullname"</span><span class="nt">/&gt;</span>
+    <span class="nt">&lt;/genClasses&gt;</span>
+  <span class="nt">&lt;/genPackages&gt;</span>
+<span class="nt">&lt;/genmodel:GenModel&gt;</span>
+</code></pre></div></div>
+<p>I have changed the modelDirectory=”/sample/src-gen”</p>
+
+<p>Now we want to implement the getFullname() method.
+we would usually implement the code in PersonImpl and change the javadoc to @generated NOT or remove the @generated.
+(and checkin the generated code as well)</p>
+
+<p>But let us try another approach</p>
+
+<p>so let us create following class</p>
+
+<p>(/sample/src/sample/impl/PersonImplCustom.java)</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">package</span> <span class="n">sample</span><span class="p">.</span><span class="n">impl</span><span class="p">;</span>
+ 
+<span class="n">import</span> <span class="n">sample</span><span class="p">.</span><span class="n">impl</span><span class="p">.</span><span class="n">PersonImpl</span><span class="p">;</span>
+ 
+<span class="k">public</span> <span class="n">class</span> <span class="n">PersonImplCustom</span> <span class="n">extends</span> <span class="n">PersonImpl</span> <span class="p">{</span>
+     
+    <span class="p">@</span><span class="n">Override</span>
+    <span class="k">public</span> <span class="k">String</span> <span class="n">getFullname</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">return</span> <span class="n">getFirstname</span><span class="p">()</span> <span class="p">+</span> <span class="s2">" "</span> <span class="p">+</span> <span class="n">getLastname</span><span class="p">();</span>
+    <span class="p">}</span>
+ 
+<span class="p">}</span>
+</code></pre></div></div>
+<p>and workflow</p>
+
+<p>(/sample/src/test.mwe2)</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>module test
+ 
+Workflow {
+     
+    bean = org.eclipse.emf.mwe.utils.StandaloneSetup {
+        platformUri = ".."
+    }
+     
+    component = org.eclipse.emf.mwe.utils.DirectoryCleaner {
+        directory = "src-gen"
+    }
+     
+    component = org.eclipse.emf.mwe2.ecore.EcoreGenerator {
+        generateCustomClasses = false
+        genModel = "platform:/resource/sample/model/sample.genmodel"
+        srcPath = "platform:/resource/sample/src"   
+    }
+     
+}
+</code></pre></div></div>
+<p>here is the Manifest for the deps
+(/sample/META-INF/MANIFEST.MF)</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: sample
+Bundle-SymbolicName: sample; singleton:=true
+Bundle-Version: 0.1.0
+Require-Bundle: org.eclipse.emf.mwe2.lib,
+ org.eclipse.emf.mwe2.launch,
+ org.apache.commons.logging,
+ org.apache.commons.lang,
+ org.eclipse.xtext.xbase.lib,
+ org.eclipse.xtext,
+ org.eclipse.xtext.generator,
+ org.apache.commons.logging,
+ org.eclipse.ui.workbench,
+ org.eclipse.core.runtime,
+ org.eclipse.core.commands,
+ org.eclipse.xtext.ui,
+ org.eclipse.core.expressions,
+ org.apache.log4j
+Export-Package: sample.impl,
+ sample.util
+</code></pre></div></div>
+<p>If we run the workflow emf is configured to take PersonImplCustom instead of PersonImpl so that the following will work nicely</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>public class Test {
+     
+    public static void main(String[] args) {
+        Person p = SampleFactory.eINSTANCE.createPerson();
+        p.setFirstname("Christian");
+        p.setLastname("Dietrich");
+        System.out.println(p.getFullname());
+    }
+ 
+}
+</code></pre></div></div>
+</section>
+   
+   <!-- Tag list -->
+  
+  
+
+
+<footer>
+  <div class="tag-list">
+    
+      <div class="meta">Tags</div>
+    
+
+    
+    <a class="button" href="/tags#Ecore">
+      <p><i class="fa fa-tag fa-fw"></i> Ecore</p>
+    </a>
+    
+    <a class="button" href="/tags#Xtext">
+      <p><i class="fa fa-tag fa-fw"></i> Xtext</p>
+    </a>
+    
+  </div>
+</footer>
+
+    
+</article>
+
+<!-- Disqus -->
+
+
+<!-- Post navigation -->
+
+  <div id="post-nav">
+  
+  <div id="previous-post" class="post-nav-post">
+      <p>Previous post</p>
+      <a href="/xtext/2013/05/18/xtext-and-dot-expressions.html">
+        Xtext and Dot/Path-Expressions
+      </a>
+  </div>
+  
+  
+  <div id="next-post" class="post-nav-post">
+      <p>Next post</p>
+      <a href="/xtext/2015/03/19/xtext-and-strings-as-cross-references.html">
+        Xtext and Strings as Cross-References
+      </a>
+  </div>
+  
+</div>
+
+    </div>
+    
+<footer class="site-footer">
+    <p class="text">Powered by <a href="https://jekyllrb.com/">Jekyll</a> with <a href="https://github.com/sylhare/Type-on-Strap">Type on Strap</a>
+</p>
+            <div class="footer-icons">
+                <ul>
+                <!-- Social icons from Font Awesome, if enabled -->
+                
+<li>
+	<a href="http://localhost:4000/feed.xml" title="Follow RSS feed">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://github.com/cdietrich" title="Follow on GitHub">
+		<span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<li>
+	<a href="https://twitter.com/chrdietrich" title="Follow on Twitter" class="type">
+        <span class="fa-stack fa-lg">
+            <i class="fa fa-circle fa-stack-2x"></i>
+            <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+        </span>
+	</a>
+</li>
+
+
+
+
+
+
+
+
+                </ul>
+            </div>
+</footer>
+
+
+
+
+  </body>
+</html>
