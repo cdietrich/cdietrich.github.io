@@ -269,3 +269,10 @@ public class GenerationHandler extends AbstractHandler implements IHandler {
  
 }
 ```
+
+Update: in newer Xtext Versions configure the File System Access as follows
+```
+fsa.setOutputPath("src-gen");
+fsa.setProject(project);
+fsa.setMonitor(new NullProgressMonitor());
+```
