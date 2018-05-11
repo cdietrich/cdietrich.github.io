@@ -200,10 +200,10 @@ So let us start with the...-->
 
 So let us take Xtext’s Hello World grammar as Starting point
 
+```
 Model:
     greetings+=Greeting*;
-     
-Gre...-->
+     ...-->
             <!--<a class="button" href="/xtext/generator/tests/2012/05/08/unittesting-xtend-generators.html">
               Continue reading
             </a>-->
@@ -228,7 +228,7 @@ Gre...-->
               Xtext offers the user to implement an Xtend Class that implements the org.eclipse.xtext.generator.IGenerator Interface. By Default this Generator is called by the Builder through a org.eclipse.xtext.builder.IXtextBuilderParticipant when saving the file. But what to do if I want to call the Generator explicitely through a context menu entry on the file as shown in the screenshot below? This will be shown in the Following example.
 
 
-            <!--Xtext offers the user to implement an Xtend Class that implements the org.eclipse.xtext.generator.IGenerator Interface. By Default this Generator is called by the Builder through a org.eclipse.xtext.builder.IXtextBuilderParticipant when saving the...-->
+            <!--Xtext offers the user to implement an Xtend Class that implements the `org.eclipse.xtext.generator.IGenerator` Interface. By Default this Generator is called by the Builder through a `org.eclipse.xtext.builder.IXtextBuilderParticipant` when saving...-->
             <!--<a class="button" href="/xtext/2011/10/15/xtext-calling-the-generator-from-a-context-menu.html">
               Continue reading
             </a>-->
@@ -269,7 +269,8 @@ public class MyDslUiModule extends org.xtext.example.mydsl.ui.AbstractMyDslUiMod
 In this case content assist is autoactivated on . , and :
 
             <!--Xtext offers nice Content Assist facilities. JDT offers a nice additional feature: Content assist is autoactivated if a certain character (.) is typed. To activate this feature in Xtext simply customize your UiModule
-public class MyDslUiModule ext...-->
+```
+public class MyDslUiModule...-->
             <!--<a class="button" href="/xtext/2011/09/19/xtext-content-assist-auto-activation.html">
               Continue reading
             </a>-->
@@ -296,10 +297,9 @@ public class MyDslUiModule ext...-->
 
             <!--In this blog post i want to show a simple example of how to use Xtend2 to generate code from Non-Xtext but EMF-based model.
 
+![Xtend with EMF]({{ "/assets/img/blog/xtend-emf1.png" | absolute_url }})
 
-
-Having a simple EMF Model i’ve created the genmodel + Model + Edit + Editor code.
-Using the Editor i’ve created a bunch ...-->
+Having a simple EMF Model i’ve created the genm...-->
             <!--<a class="button" href="/xtext/2011/07/29/xtend2-code-generators-with-non-xtext-models.html">
               Continue reading
             </a>-->
