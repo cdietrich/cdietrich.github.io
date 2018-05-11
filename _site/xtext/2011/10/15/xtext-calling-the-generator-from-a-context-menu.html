@@ -40,7 +40,7 @@
     <!-- seo tags -->
     <!-- Begin Jekyll SEO tag v2.4.0 -->
 <title>Xtext: Calling the Generator from a Context Menu | Xtext and more</title>
-<meta name="generator" content="Jekyll v3.7.3" />
+<meta name="generator" content="Jekyll v3.8.1" />
 <meta property="og:title" content="Xtext: Calling the Generator from a Context Menu" />
 <meta name="author" content="Christian Dietrich" />
 <meta property="og:locale" content="en_US" />
@@ -93,7 +93,7 @@
         </li>
         <li>
             <a class="clear" href="/about/">
-                About
+                Impressum
             </a>
         </li>
         
@@ -390,6 +390,12 @@ try the genenerator – and hey – it works.</p>
     }
  
 }
+</code></pre></div></div>
+
+<p>Update: in newer Xtext Versions configure the File System Access as follows</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>fsa.setOutputPath("src-gen");
+fsa.setProject(project);
+fsa.setMonitor(new NullProgressMonitor());
 </code></pre></div></div>
 </section>
    
