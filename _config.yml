@@ -1,6 +1,6 @@
 # SITE CONFIGURATION
 baseurl: ""
-url: "https://cdietrich.github.io"
+url: "https://www.dietrich-it.de"
 title: Xtext and more # site's title
 description: "Articles on Eclipse Xtext by Christian Dietrich" # used by search engines
 
