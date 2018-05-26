@@ -13,7 +13,7 @@ Syringenweg 3
 70563 Stuttgart
 
 ## Kontakt
-Telefon: +49 (0) 177 6022709  
+Telefon: +49 (0) 177 6027709  
 E-Mail: webmaster@dietrich-it.de  
 Internetadresse: [www.dietrich-it.de](//www.dietrich-it.de)  
 
@@ -34,7 +34,7 @@ Die durch die Seitenbetreiber erstellten bzw. verwendeten Inhalte und Werke auf 
 Christian Dietrich  
 Syringenweg 3  
 70563 Stuttgart  
-Telefon: +49 (0) 177 6022709  
+Telefon: +49 (0) 177 6027709  
 E-Mail: webmaster@dietrich-it.de  
 
 ## Erfassung allgemeiner Informationen
